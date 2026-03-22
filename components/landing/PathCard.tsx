@@ -1,11 +1,12 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import type { Route } from 'next'
 
 interface PathCardProps {
   title: string
   subtitle: string
-  href: string
+  href: Route
   iconClassName: string
 }
 
