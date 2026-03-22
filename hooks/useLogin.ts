@@ -32,7 +32,7 @@ export function useLogin() {
 
     if (error) {
       setStatus('error')
-      setErrorMessage("We couldn't sign you in. Check your email and password and try again.")
+      setErrorMessage(error.message || "We couldn't sign you in. Check your email and password and try again.")
       return
     }
 

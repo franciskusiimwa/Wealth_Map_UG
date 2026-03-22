@@ -41,11 +41,17 @@ export function useSignup() {
     }
 
     const supabase = createClient()
-    const { error } = await supabase.auth.signUp({ email, password })
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback`
+      }
+    })
 
     if (error) {
       setStatus('error')
-      setErrorMessage('We could not create your account right now. Please try again.')
+      setErrorMessage(error.message || 'We could not create your account right now. Please try again.')
       return
     }
 
