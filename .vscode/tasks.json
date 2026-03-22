@@ -1,0 +1,53 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "install dependencies",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"install"
+			]
+		},
+		{
+			"label": "verify npm version",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"--version"
+			]
+		},
+		{
+			"label": "typecheck",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"typecheck"
+			]
+		},
+		{
+			"label": "run dev",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"dev"
+			],
+			"isBackground": true
+		},
+		{
+			"label": "recovery-install-typecheck-dev",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-ExecutionPolicy",
+				"Bypass",
+				"-Command",
+				"Get-Process node -ErrorAction SilentlyContinue | Stop-Process -Force; Remove-Item -Recurse -Force .\\node_modules -ErrorAction SilentlyContinue; Remove-Item -Force .\\package-lock.json -ErrorAction SilentlyContinue; npm config set registry https://registry.npmjs.org/; npm config delete proxy; npm config delete https-proxy; npm config set fetch-retries 5; npm config set fetch-retry-mintimeout 20000; npm config set fetch-retry-maxtimeout 120000; npm config set network-timeout 300000; npm cache verify; npm install --no-audit --no-fund; npm run typecheck; npm run dev"
+			],
+			"isBackground": false
+		}
+	]
+}
